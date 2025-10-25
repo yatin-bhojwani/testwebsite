@@ -195,21 +195,21 @@ const Header = ({ onNavigate }) => {
               onClick={(e) => { e.preventDefault(); handleMobileNav('home'); }} 
               className="text-white hover:text-violet-200 font-medium p-2 rounded-md"
             >
-              Home
+              HOME
             </a>
             <a 
               href="#" 
               onClick={(e) => { e.preventDefault(); handleMobileNav('treatments'); }} 
               className="text-white hover:text-violet-200 font-medium p-2 rounded-md"
             >
-              Treatments
+              TREATMENTS
             </a>
             <a 
               href="#" 
               onClick={(e) => { e.preventDefault(); handleMobileNav('testimonials'); }} 
               className="text-white hover:text-violet-200 font-medium p-2 rounded-md"
             >
-              Testimonials
+              TESTIMONIALS
             </a>
             <a
               href="#"
