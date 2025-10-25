@@ -282,7 +282,7 @@ const HomePage = ({ onNavigate }) => {
       {/* Hero Section */}
       <section className="relative bg-violet-600 py-24 md:py-32 flex items-center justify-center text-center min-h-[60vh]">
         {/* Background Pattern Layer */}
-        <div className="absolute inset-0 z-0 bg-[url('/beuty.webp')] bg-contain bg-no-repeat bg-right"></div>
+        <div className="hidden md:block absolute inset-0 z-0 bg-[url('/beuty.webp')] bg-no-repeat bg-right md:bg-contain"></div>
         
         {/* Content Layer */}
         <div className="container mx-auto px-6 relative z-10 max-w-3xl">
