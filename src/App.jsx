@@ -14,7 +14,9 @@ import {
   Facebook,
   Twitter,
   Linkedin,
-  Calendar
+  Calendar,
+  Menu, // Added for mobile menu
+  X     // Added for mobile menu
 } from 'lucide-react';
 
 // --- Reusable Section Title ---
@@ -90,8 +92,17 @@ const NavLink = ({ onNavigate, pageName, children }) => (
 
 // --- Layout: Header ---
 const Header = ({ onNavigate }) => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Helper to handle navigation and close the mobile menu
+  const handleMobileNav = (pageName) => {
+    onNavigate(pageName);
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
+      {/* Main Nav Bar */}
       <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
         <a 
           href="#" 
@@ -101,19 +112,68 @@ const Header = ({ onNavigate }) => {
           <PlusSquare className="h-8 w-8 text-blue-600" />
           <span className="text-2xl font-bold text-slate-800">Shree Sai Clinic</span>
         </a>
+
+        {/* Desktop Nav Links */}
         <div className="hidden md:flex items-center space-x-6">
           <NavLink onNavigate={onNavigate} pageName="home">Home</NavLink>
           <NavLink onNavigate={onNavigate} pageName="treatments">Treatments</NavLink>
           <NavLink onNavigate={onNavigate} pageName="testimonials">Testimonials</NavLink>
         </div>
+
+        {/* Desktop Book Appointment Button */}
         <a
           href="#"
           onClick={(e) => { e.preventDefault(); onNavigate('appointment'); }}
-          className="bg-blue-600 text-white px-6 py-2 rounded-lg font-medium shadow-lg hover:bg-blue-700 transition duration-300"
+          className="hidden md:block bg-blue-600 text-white px-6 py-2 rounded-lg font-medium shadow-lg hover:bg-blue-700 transition duration-300"
         >
           Book Appointment
         </a>
+
+        {/* Mobile Menu Toggle Button */}
+        <button 
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="md:hidden text-slate-800"
+          aria-label="Toggle menu"
+        >
+          {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
       </nav>
+
+      {/* Mobile Menu Dropdown */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden bg-white shadow-lg border-t border-slate-200">
+          <nav className="flex flex-col p-4 space-y-4">
+            <a 
+              href="#" 
+              onClick={(e) => { e.preventDefault(); handleMobileNav('home'); }} 
+              className="text-slate-700 hover:text-blue-600 font-medium p-2 rounded-md"
+            >
+              Home
+            </a>
+            <a 
+              href="#" 
+              onClick={(e) => { e.preventDefault(); handleMobileNav('treatments'); }} 
+              className="text-slate-700 hover:text-blue-600 font-medium p-2 rounded-md"
+            >
+              Treatments
+            </a>
+            <a 
+              href="#" 
+              onClick={(e) => { e.preventDefault(); handleMobileNav('testimonials'); }} 
+              className="text-slate-700 hover:text-blue-600 font-medium p-2 rounded-md"
+            >
+              Testimonials
+            </a>
+            <a
+              href="#"
+              onClick={(e) => { e.preventDefault(); handleMobileNav('appointment'); }}
+              className="bg-blue-600 text-white text-center px-6 py-3 rounded-lg font-medium shadow-lg hover:bg-blue-700 transition duration-300"
+            >
+              Book Appointment
+            </a>
+          </nav>
+        </div>
+      )}
     </header>
   );
 };
@@ -402,7 +462,7 @@ const AppointmentPage = () => {
               <p className="text-slate-700">Your appointment request has been submitted. Our team will contact you shortly to confirm your date and time.</p>
               <button
                 onClick={() => setSubmitted(false)}
-                className="mt-6 bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition duration-300"
+                classsName="mt-6 bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition duration-300"
               >
                 Book Another
               </button>
@@ -475,3 +535,4 @@ export default function App() {
     </div>
   );
 }
+
